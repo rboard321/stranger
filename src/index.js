@@ -1,17 +1,59 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React, { useEffect, useState } from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Posts from "./component/Posts";
+import Login from "./component/Login";
+import Register from "./component/Register";
+import Profile from "./component/Profile";
+import Create from "./component/Create";
+import Header from "./component/Header";
+import Messages from "./component/Messages";
+
+const App = () => {
+  const [token, setToken] = useState("");
+  const [posts, setPosts] = useState([]);
+  const [profile, setProfile] = useState({});
+  const [singlePost, setSinglepost] = useState([]);
+  const [userId, setUserid] =useState('')
+  console.log(userId)
+
+  return (
+    <>
+      <Header />
+      <Routes>
+        <Route
+          path="/posts"
+          element={
+            <Posts
+              setSinglepost={setSinglepost}
+              setPosts={setPosts}
+              posts={posts}
+              token={token}
+              profile={profile}
+            />
+          }
+        />
+        <Route
+          exact
+          path="/account/:method"
+          element={<Login setToken={setToken} />}
+        />
+        <Route
+          path="/profile"
+          element={<Profile token={token} setUserid={setUserid} setProfile={setProfile} profile={profile}/>}
+          setProfile={setProfile}
+        />
+        <Route path="/create" element={<Create />} />
+        <Route path="/message" element={<Messages userId={userId} posts={posts} />} />
+      </Routes>
+    </>
+  );
+};
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Router>
     <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+  </Router>,
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+  document.getElementById("app")
+);
