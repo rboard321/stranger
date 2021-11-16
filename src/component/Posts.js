@@ -51,7 +51,7 @@ const Posts = ({ setPosts, posts, profile }) => {
     };
     fetchPosts();
   };
-
+console.log(posts)
   return (
     <>
       <h1>Posts</h1>
@@ -59,7 +59,12 @@ const Posts = ({ setPosts, posts, profile }) => {
         <div className="post" key={post.id}>
           <h2>{post.title}</h2>
           <h4>{post.price}</h4>
+          <h5>{post.location}</h5>
           <p>{post.description}</p>
+
+          {post.willDeliver ? (
+            <h5>Will deliver</h5>
+          ) : null}
           {post.isAuthor === false ? (
             <Link to="/message" state={{ id: post._id }} className="btnMessage">
               Message/View

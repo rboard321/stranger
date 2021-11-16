@@ -16,7 +16,7 @@ const Create = () => {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [location, setLocation] = useState("");
-  const [willDeliver, setDeliver] = useState(false);
+  const [willDeliver, setWilldeliver] = useState(false);
   let navigate = useNavigate();
 
   async function submitPost(event) {
@@ -82,7 +82,7 @@ const Create = () => {
           onChange={(event) => setLocation(event.target.value)}
         />
         <br></br>
-        <input type="checkbox" />
+        <input type="checkbox"  onChange={() => setWilldeliver(true)}/>
         Will deliver
         <br></br>
         <button>Post</button>
