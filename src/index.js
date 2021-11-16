@@ -8,19 +8,28 @@ import Profile from "./component/Profile";
 import Create from "./component/Create";
 import Header from "./component/Header";
 import Messages from "./component/Messages";
+import Home from "./component/Home";
 
 const App = () => {
   const [token, setToken] = useState("");
   const [posts, setPosts] = useState([]);
   const [profile, setProfile] = useState({});
   const [singlePost, setSinglepost] = useState([]);
-  const [userId, setUserid] =useState('')
-  console.log(userId)
+  const [userId, setUserid] = useState("");
+  console.log(userId);
 
   return (
     <>
       <Header />
       <Routes>
+        <Route 
+        exact path="/" 
+        element={
+            <Home
+             profile={profile} 
+            />
+          } 
+        />
         <Route
           path="/posts"
           element={
@@ -40,11 +49,21 @@ const App = () => {
         />
         <Route
           path="/profile"
-          element={<Profile token={token} setUserid={setUserid} setProfile={setProfile} profile={profile}/>}
+          element={
+            <Profile
+              token={token}
+              setUserid={setUserid}
+              setProfile={setProfile}
+              profile={profile}
+            />
+          }
           setProfile={setProfile}
         />
         <Route path="/create" element={<Create />} />
-        <Route path="/message" element={<Messages userId={userId} posts={posts} />} />
+        <Route
+          path="/message"
+          element={<Messages userId={userId} posts={posts} />}
+        />
       </Routes>
     </>
   );
