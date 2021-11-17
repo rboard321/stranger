@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter, Route, Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router";
-import Profile from "./Profile";
 
 const cohortName = "2108-ECE-RM-WEB-PT";
 const APIURL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
@@ -12,12 +11,11 @@ const Login = ({ setToken }) => {
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [loggedIn, setLoggedin] = useState(false);
   const [isMatched, setIsMatched] = useState(false);
-  // set boolean state
-  const [userId, setUserid] = useState('');
+
   const params = useParams();
 
   let navigate = useNavigate();
-  //functions go here
+
   function logIn(resp) {
     if (resp.data) {
       setToken(resp.data.token);
@@ -31,23 +29,26 @@ const Login = ({ setToken }) => {
     }
   }
 
-
   async function loginRoutine() {
-    const resp = await fetch(`${APIURL}/users/${params.method}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        user: {
-          username,
-          password,
+    try {
+      const resp = await fetch(`${APIURL}/users/${params.method}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      }),
-    });
-    const respObj = await resp.json();
-    console.log(respObj);
-    logIn(respObj);
+        body: JSON.stringify({
+          user: {
+            username,
+            password,
+          },
+        }),
+      });
+      const respObj = await resp.json();
+
+      logIn(respObj);
+    } catch (error) {
+      console.log(error);
+    }
   }
   if (loggedIn === false) {
     return (

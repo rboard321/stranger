@@ -1,46 +1,37 @@
-import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Link,
-  useLocation,
-} from "react-router-dom";
+import React, { useState } from "react";
+
+import { useLocation } from "react-router-dom";
 
 const cohortName = "2108-ECE-RM-WEB-PT";
 const APIURL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
 const Message = ({ posts, userId }) => {
-  
   const [message, setMessage] = useState("");
- const [author, setAuthor] = useState('');
+  const [author, setAuthor] = useState("");
   const location = useLocation();
   const { id } = location.state;
 
   async function sendMessage(message) {
     console.log(`${APIURL}/posts/${id}`);
-    const resp = await fetch(`${APIURL}/posts/${id}/messages`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify({
-        message: {
-          content: message,
+    try {
+      const resp = await fetch(`${APIURL}/posts/${id}/messages`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-      }),
-    });
-    const data = await resp.json();
-    
+        body: JSON.stringify({
+          message: {
+            content: message,
+          },
+        }),
+      });
+      const data = await resp.json();
+    } catch (error) {
+      console.log(error);
+    }
   }
-
-  console.log('this is: ', id, 'this is: ', userId)
-
   return (
-    
     <>
-    
       <h1>Posts: </h1>
       {posts.map((post) =>
         id === post._id ? (
@@ -49,32 +40,22 @@ const Message = ({ posts, userId }) => {
             <h4>{post.price}</h4>
             <div>{post.description}</div>
             <form
-                    onSubmit={async (event) => {
-                      event.preventDefault();
-                      sendMessage(message);
-                    }}
-                  >
-                    <input
-                      type="text"
-                      placeholder="message"
-                      value={message}
-                      onChange={(event) => setMessage(event.target.value)}
-                    ></input>
-                    <button>Send</button>
-                  </form>
-                
-            </div>
-            
-            
-                 
+              onSubmit={async (event) => {
+                event.preventDefault();
+                sendMessage(message);
+              }}
+            >
+              <input
+                type="text"
+                placeholder="message"
+                value={message}
+                onChange={(event) => setMessage(event.target.value)}
+              ></input>
+              <button>Send</button>
+            </form>
+          </div>
         ) : null
-      
-      )
-}
-
-
-     
-      
+      )}
     </>
   );
 };

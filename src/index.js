@@ -14,27 +14,23 @@ const App = () => {
   const [token, setToken] = useState("");
   const [posts, setPosts] = useState([]);
   const [profile, setProfile] = useState({});
-  const [singlePost, setSinglepost] = useState([]);
+
   const [userId, setUserid] = useState("");
-  console.log(userId);
+  console.log("userId", userId);
 
   return (
     <>
       <Header />
       <Routes>
-        <Route 
-        exact path="/" 
-        element={
-            <Home
-             profile={profile} 
-            />
-          } 
+        <Route
+          exact
+          path="/"
+          element={<Home profile={profile} userId={userId} />}
         />
         <Route
           path="/posts"
           element={
             <Posts
-              setSinglepost={setSinglepost}
               setPosts={setPosts}
               posts={posts}
               token={token}
