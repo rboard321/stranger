@@ -53,8 +53,9 @@ const Login = ({ setToken }) => {
   if (loggedIn === false) {
     return (
       <>
-        <h1>Login/Register</h1>
+        <h1 className="title">Login/Register</h1>
         <form
+          className="title"
           onSubmit={async (event) => {
             event.preventDefault();
             if (params.method !== "register") {
@@ -80,7 +81,9 @@ const Login = ({ setToken }) => {
             value={password}
             onChange={(event) => setPassword(event.target.value)}
           ></input>
-          <button type="submit">Submit</button>
+          <button type="submit" disabled={password.length < 8}>
+            Submit
+          </button>
           <br></br>
           {params.method === "register" ? (
             <input
@@ -92,7 +95,11 @@ const Login = ({ setToken }) => {
           ) : null}
           <Link to="/account/register">Register</Link>
         </form>
-
+        {password.length < 8 && params.method === "register" ? (
+          <div>
+            <h3>Your password must be 8 characters long</h3>
+          </div>
+        ) : null}
         <div className={isMatched ? "" : "noMatch"}>
           <h3>Your passwords don't match</h3>
         </div>
@@ -101,8 +108,7 @@ const Login = ({ setToken }) => {
   } else {
     return (
       <>
-        <h1>Wolcome to Stranger's Things</h1>
-        <h3>Logged in as </h3>
+        <h1>Welcome</h1>
       </>
     );
   }

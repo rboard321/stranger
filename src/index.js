@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Posts from "./component/Posts";
@@ -14,9 +14,8 @@ const App = () => {
   const [token, setToken] = useState("");
   const [posts, setPosts] = useState([]);
   const [profile, setProfile] = useState({});
-
   const [userId, setUserid] = useState("");
-  console.log("userId", userId);
+  console.log(profile);
 
   return (
     <>

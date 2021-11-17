@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 const cohortName = "2108-ECE-RM-WEB-PT";
 const APIURL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
 
-const Profile = ({ profile, setProfile, setUserid, userId }) => {
+const Profile = ({ profile, setProfile, setUserid }) => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -24,8 +24,10 @@ const Profile = ({ profile, setProfile, setUserid, userId }) => {
 
   return (
     <>
-      <h1>Welcome {profile.username ? profile.username : ""}</h1>
-      <h3>Messages to Me:</h3>
+      <h1 className="title">
+        Welcome {profile.username ? profile.username : ""}
+      </h1>
+      <h3 className="title">Messages to Me:</h3>
       {messages.map((item) =>
         profile._id !== item.fromUser._id ? (
           <div className="post" key={item._id}>
@@ -35,7 +37,7 @@ const Profile = ({ profile, setProfile, setUserid, userId }) => {
           </div>
         ) : null
       )}
-      <h3>Messages from me:</h3>
+      <h3 className="title">Messages from me:</h3>
       {messages.map((item) =>
         profile._id === item.fromUser._id ? (
           <div className="post" key={item._id}>

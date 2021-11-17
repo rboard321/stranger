@@ -4,14 +4,13 @@ import { useLocation } from "react-router-dom";
 
 const cohortName = "2108-ECE-RM-WEB-PT";
 const APIURL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
-const Message = ({ posts, userId }) => {
+const Message = ({ posts }) => {
   const [message, setMessage] = useState("");
-  const [author, setAuthor] = useState("");
+
   const location = useLocation();
   const { id } = location.state;
 
   async function sendMessage(message) {
-    console.log(`${APIURL}/posts/${id}`);
     try {
       const resp = await fetch(`${APIURL}/posts/${id}/messages`, {
         method: "POST",

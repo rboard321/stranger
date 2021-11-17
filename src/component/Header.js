@@ -26,7 +26,7 @@ const Header = () => {
         <Link className={token ? "" : "ifLoggedIn"} to="/create">
           {" "}
           Create
-        </Link>
+        </Link>{" "}
         |
         <Link className={token ? "" : "ifLoggedIn"} to="/profile">
           {" "}

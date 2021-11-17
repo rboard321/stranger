@@ -1,13 +1,11 @@
 import React, { useEffect } from "react";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const cohortName = "2108-ECE-RM-WEB-PT";
 const APIURL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
 
-let navigate = useNavigate;
-
-const Posts = ({ setPosts, posts, profile }) => {
+const Posts = ({ setPosts, posts }) => {
   useEffect(() => {
     const fetchPosts = async () => {
       const resp = await fetch(`${APIURL}/posts`, {
@@ -49,7 +47,7 @@ const Posts = ({ setPosts, posts, profile }) => {
 
   return (
     <>
-      <h1>Posts</h1>
+      <h1 className="title">Posts</h1>
       {posts.map((post) => (
         <div className="post" key={post.id}>
           <h2>{post.title}</h2>
@@ -68,7 +66,6 @@ const Posts = ({ setPosts, posts, profile }) => {
               Delete
             </button>
           ) : null}
-          
         </div>
       ))}
     </>

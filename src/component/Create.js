@@ -1,12 +1,6 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Link,
-  useNavigate,
-} from "react-router-dom";
+
+import { Link, useNavigate } from "react-router-dom";
 
 const cohortName = "2108-ECE-RM-WEB-PT";
 const APIURL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
@@ -39,22 +33,21 @@ const Create = () => {
     const json = await resp.json();
     navigate("/posts");
   }
-  if(localStorage.getItem('token') === null){
-    return(
+  if (localStorage.getItem("token") === null) {
+    return (
       <>
-        <h1>
-          Please Login
-        </h1>
+        <h1>Please Login</h1>
         <Link to="/account/login">Login/Register</Link>
       </>
-    )
+    );
   }
   return (
     <>
-      <h3>Create Post</h3>
+      <h3 className="title">Create Post</h3>
 
-      <form onSubmit={submitPost}>
+      <form className="title" onSubmit={submitPost}>
         <input
+          className="field"
           type="text"
           placeholder="Title"
           value={title}
@@ -82,7 +75,7 @@ const Create = () => {
           onChange={(event) => setLocation(event.target.value)}
         />
         <br></br>
-        <input type="checkbox"  onChange={() => setWilldeliver(true)}/>
+        <input type="checkbox" onChange={() => setWilldeliver(true)} />
         Will deliver
         <br></br>
         <button>Post</button>
