@@ -51,7 +51,7 @@ const Message = ({ posts }) => {
                 value={message}
                 onChange={(event) => setMessage(event.target.value)}
               ></input>
-              <button>Send</button>
+              <button disabled={localStorage.getItem('token') === null}>Send</button>
             </form>
           </div>
         ) : null

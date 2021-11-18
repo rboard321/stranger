@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
 
@@ -6,6 +6,7 @@ const cohortName = "2108-ECE-RM-WEB-PT";
 const APIURL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
 
 const Posts = ({ setPosts, posts }) => {
+  const [filter, setFilter] = useState('');
   useEffect(() => {
     const fetchPosts = async () => {
       const resp = await fetch(`${APIURL}/posts`, {
@@ -45,9 +46,11 @@ const Posts = ({ setPosts, posts }) => {
     fetchPosts();
   };
 
+
   return (
     <>
       <h1 className="title">Posts</h1>
+      
       {posts.map((post) => (
         <div className="post" key={post.id}>
           <h2>{post.title}</h2>
