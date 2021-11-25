@@ -1,1 +1,60 @@
+# You should almost always have a .gitignore file in your repo. There are lots of files that will commonly be in your
+# project that you wouldn't want included in the repository for various reasons. I've included some common filetypes
+# below that tend to show up in React projects and should NOT be included
+
+# Node packages take up TONS of space and can just be downloaded/installed by other users with `npm i`
+# You had already included this, but I've provided the same file for both you and Brian.
 node_modules
+
+# Mac computers sometimes add this hidden file
+.DS_STORE
+
+# Some editors (including IntelliJ Idea and VSCode) will include settings files in your repo.
+.idea
+.vscode
+
+# Sometimes you'll have files that contain sensitive information or toggle environment variables that shouldn't be included
+.env
+.secrets
+
+# Build/compiled files/directories are also unnecessary, as they can be rebuilt
+target
+build
+
+# Below are less common in my exerience but also things that generally shouldn't be included:
+
+# Compiled source #
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Packages #
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Logs and databases #
+*.log
+*.sql
+*.sqlite
+
+# OS generated files #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Github has a TON of templates available to help you out - https://github.com/github/gitignorehttps

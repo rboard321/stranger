@@ -1,7 +1,7 @@
-import React from "react";
+import React from "react"
 
 const Home = ({ profile }) => {
-  const userName = profile.username;
+  const userName = profile.username
   if (localStorage.getItem("token") === null) {
     return (
       <>
@@ -11,14 +11,14 @@ const Home = ({ profile }) => {
           just like you!
         </h3>
       </>
-    );
+    )
   }
   return (
     <>
       <h1 className="title">Welome to Stranger's Things</h1>
       <h2 className="title">You are currently logged in as {userName}.</h2>
     </>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

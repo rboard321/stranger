@@ -1,26 +1,38 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react"
 
-const cohortName = "2108-ECE-RM-WEB-PT";
-const APIURL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
+const cohortName = "2108-ECE-RM-WEB-PT"
+const APIURL = `https://strangers-things.herokuapp.com/api/${cohortName}`
 
 const Profile = ({ profile, setProfile, setUserid }) => {
-  const [messages, setMessages] = useState([]);
+  /* This is not entirely necessary, but is considered good practice: Declare your states to be the same "shapes" as the
+   * data you intend to include. In this case, you simply declared an empty array as the initial state. In the long run,
+   * it may be better to more explicitly define the data you intend to use because we won't necessarily see the layout of
+   * that data here while using it.
+   *
+   * So, instead of `useState([])` you could check what your data will look like and initialize this state as something like
+   * `useState([{ fromUser: false}])`. This will allow you, your code editor, and anyone else reading your code to see
+   * what you're working with.
+   */
+  const [messages, setMessages] = useState([])
 
   useEffect(() => {
     const fetchProfile = async () => {
       const resp = await fetch(`${APIURL}/users/me`, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-      const data = await resp.json();
-      setUserid(data.data._id);
-      setProfile(data.data);
-      setMessages(data.data.messages);
-    };
-    fetchProfile();
-  }, []);
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      })
+      const data = await resp.json()
+      setUserid(data.data._id)
+      setProfile(data.data)
+      setMessages(data.data.messages)
+    }
+    /* Your `fetchProfile()` function returns a promise. It is generally good practice to "handle" these using a `try/catch`
+     * block (newer syntax) or `.then/.catch` (older syntax). A promise may not resolve correctly and you should have a
+     * nice fallback for that. */
+    fetchProfile()
+  }, [])
 
   return (
     <>
@@ -48,7 +60,7 @@ const Profile = ({ profile, setProfile, setUserid }) => {
         ) : null
       )}
     </>
-  );
-};
+  )
+}
 
-export default Profile;
+export default Profile

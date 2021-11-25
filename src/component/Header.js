@@ -1,10 +1,10 @@
-import React from "react";
+import React from "react"
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"
 
 const Header = () => {
-  let navigate = useNavigate();
-  const token = localStorage.getItem("token");
+  let navigate = useNavigate()
+  const token = localStorage.getItem("token")
   return (
     <>
       <header>
@@ -35,15 +35,15 @@ const Header = () => {
         <button
           className={token ? "" : "ifLoggedIn"}
           onClick={() => {
-            localStorage.removeItem("token");
-            navigate("/posts");
+            localStorage.removeItem("token")
+            navigate("/posts")
           }}
         >
           log out
         </button>
       </header>
     </>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

@@ -1,30 +1,31 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useParams } from "react-router";
+import React, { useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import { useParams } from "react-router"
 
-const cohortName = "2108-ECE-RM-WEB-PT";
-const APIURL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
+const cohortName = "2108-ECE-RM-WEB-PT"
+const APIURL = `https://strangers-things.herokuapp.com/api/${cohortName}`
 
 const Login = ({ setToken }) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [loggedIn, setLoggedin] = useState(false);
-  const [isMatched, setIsMatched] = useState(false);
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const [passwordConfirm, setPasswordConfirm] = useState("")
+  const [loggedIn, setLoggedin] = useState(false)
+  const [isMatched, setIsMatched] = useState(false)
 
-  const params = useParams();
+  const params = useParams()
 
-  let navigate = useNavigate();
+  let navigate = useNavigate()
 
   function logIn(resp) {
     if (resp.data) {
-      setToken(resp.data.token);
-      localStorage.setItem("token", resp.data.token);
+      setToken(resp.data.token)
+      localStorage.setItem("token", resp.data.token)
+      // Try to stick with a "deep equals" (`===`) for comparisons as a shallow equals (`==`) can result in unexpected type coercion.
       if (resp.data.token == "") {
-        setLoggedin(false);
+        setLoggedin(false)
       } else {
-        setLoggedin(true);
-        navigate("/profile");
+        setLoggedin(true)
+        navigate("/profile")
       }
     }
   }
@@ -34,20 +35,20 @@ const Login = ({ setToken }) => {
       const resp = await fetch(`${APIURL}/users/${params.method}`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({
           user: {
             username,
-            password,
-          },
-        }),
-      });
-      const respObj = await resp.json();
+            password
+          }
+        })
+      })
+      const respObj = await resp.json()
 
-      logIn(respObj);
+      logIn(respObj)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   }
   if (loggedIn === false) {
@@ -57,14 +58,14 @@ const Login = ({ setToken }) => {
         <form
           className="title"
           onSubmit={async (event) => {
-            event.preventDefault();
+            event.preventDefault()
             if (params.method !== "register") {
-              loginRoutine();
+              loginRoutine()
             } else if (password === passwordConfirm) {
-              setIsMatched(false);
-              loginRoutine();
+              setIsMatched(false)
+              loginRoutine()
             } else {
-              setIsMatched(true);
+              setIsMatched(true)
             }
           }}
         >
@@ -104,14 +105,14 @@ const Login = ({ setToken }) => {
           <h3>Your passwords don't match</h3>
         </div>
       </>
-    );
+    )
   } else {
     return (
       <>
         <h1>Welcome</h1>
       </>
-    );
+    )
   }
-};
+}
 
-export default Login;
+export default Login

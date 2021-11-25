@@ -1,37 +1,37 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"
 
-const cohortName = "2108-ECE-RM-WEB-PT";
-const APIURL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
+const cohortName = "2108-ECE-RM-WEB-PT"
+const APIURL = `https://strangers-things.herokuapp.com/api/${cohortName}`
 
 const Create = () => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
-  const [location, setLocation] = useState("");
-  const [willDeliver, setWilldeliver] = useState(false);
-  let navigate = useNavigate();
+  const [title, setTitle] = useState("")
+  const [description, setDescription] = useState("")
+  const [price, setPrice] = useState("")
+  const [location, setLocation] = useState("")
+  const [willDeliver, setWilldeliver] = useState(false)
+  let navigate = useNavigate()
 
   async function submitPost(event) {
-    event.preventDefault();
+    event.preventDefault()
     const resp = await fetch(`${APIURL}/posts`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${localStorage.getItem("token")}`
       },
       body: JSON.stringify({
         post: {
           title,
           description,
           price,
-          willDeliver,
-        },
-      }),
-    });
-    const json = await resp.json();
-    navigate("/posts");
+          willDeliver
+        }
+      })
+    })
+    const json = await resp.json()
+    navigate("/posts")
   }
   if (localStorage.getItem("token") === null) {
     return (
@@ -39,7 +39,7 @@ const Create = () => {
         <h1>Please Login</h1>
         <Link to="/account/login">Login/Register</Link>
       </>
-    );
+    )
   }
   return (
     <>
@@ -81,7 +81,7 @@ const Create = () => {
         <button>Post</button>
       </form>
     </>
-  );
-};
+  )
+}
 
-export default Create;
+export default Create

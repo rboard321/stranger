@@ -1,21 +1,21 @@
-import React, { useState } from "react";
-import ReactDOM from "react-dom";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Posts from "./component/Posts";
-import Login from "./component/Login";
-import Register from "./component/Register";
-import Profile from "./component/Profile";
-import Create from "./component/Create";
-import Header from "./component/Header";
-import Messages from "./component/Messages";
-import Home from "./component/Home";
+import React, { useState } from "react"
+import ReactDOM from "react-dom"
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
+import Posts from "./component/Posts"
+import Login from "./component/Login"
+import Register from "./component/Register"
+import Profile from "./component/Profile"
+import Create from "./component/Create"
+import Header from "./component/Header"
+import Messages from "./component/Messages"
+import Home from "./component/Home"
 
 const App = () => {
-  const [token, setToken] = useState("");
-  const [posts, setPosts] = useState([]);
-  const [profile, setProfile] = useState({});
-  const [userId, setUserid] = useState("");
-  console.log(profile);
+  const [token, setToken] = useState("")
+  const [posts, setPosts] = useState([])
+  const [profile, setProfile] = useState({})
+  const [userId, setUserid] = useState("")
+  console.log(profile)
 
   return (
     <>
@@ -61,8 +61,8 @@ const App = () => {
         />
       </Routes>
     </>
-  );
-};
+  )
+}
 
 ReactDOM.render(
   <Router>
@@ -70,4 +70,4 @@ ReactDOM.render(
   </Router>,
 
   document.getElementById("app")
-);
+)

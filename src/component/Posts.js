@@ -1,25 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react"
+/* In newer versions of React, it's not actually necessary for React to be imported within a file unless you intend to
+ * use it for "dot notation". One example would be using `React.memo()` to memoize a component before export to avoid
+ * additional re-renders (although `memo` itself is a more advanced topic you'll cover later) */
 
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
-const cohortName = "2108-ECE-RM-WEB-PT";
-const APIURL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
+const cohortName = "2108-ECE-RM-WEB-PT"
+const APIURL = `https://strangers-things.herokuapp.com/api/${cohortName}`
 
 const Posts = ({ setPosts, posts }) => {
-  const [filter, setFilter] = useState('');
+  const [filter, setFilter] = useState("")
   useEffect(() => {
     const fetchPosts = async () => {
       const resp = await fetch(`${APIURL}/posts`, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-      const data = await resp.json();
-      setPosts(data.data.posts);
-    };
-    fetchPosts();
-  }, []);
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      })
+      const data = await resp.json()
+      setPosts(data.data.posts)
+    }
+    fetchPosts()
+  }, [])
 
   const handleDelete = async (postId) => {
     try {
@@ -27,30 +30,29 @@ const Posts = ({ setPosts, posts }) => {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      })
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
     const fetchPosts = async () => {
       const resp = await fetch(`${APIURL}/posts`, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-      const data = await resp.json();
-      setPosts(data.data.posts);
-    };
-    fetchPosts();
-  };
-
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      })
+      const data = await resp.json()
+      setPosts(data.data.posts)
+    }
+    fetchPosts()
+  }
 
   return (
     <>
       <h1 className="title">Posts</h1>
-      
+
       {posts.map((post) => (
         <div className="post" key={post.id}>
           <h2>{post.title}</h2>
@@ -72,7 +74,7 @@ const Posts = ({ setPosts, posts }) => {
         </div>
       ))}
     </>
-  );
-};
+  )
+}
 
-export default Posts;
+export default Posts
