@@ -85,5 +85,7 @@ margin-bottom: 5px;
   background-color: grey;
   width: 10%;
   border: black 1px solid;
-  border-radius: 10%;
+  border-radius: 2rem;
+  margin-bottom: 4px;
+  margin-top: 4px;
 }

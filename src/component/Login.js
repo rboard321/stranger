@@ -13,7 +13,7 @@ const Login = ({ setToken }) => {
   const [isMatched, setIsMatched] = useState(false);
 
   const params = useParams();
-
+console.log('params>>>',params)
   let navigate = useNavigate();
 
   function logIn(resp) {
